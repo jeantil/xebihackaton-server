@@ -11,7 +11,7 @@ object ApplicationBuild extends Build {
   val byjean_snapshots = "Byjean snapshots" at "http://repo.byjean.eu/snapshots/"
   val typesafe="Typesafe repository releases" at "http://repo.typesafe.com/typesafe/releases/"
   val appDependencies = { Seq(
-  "play" %% "play-java-jpa" % "2.1-RC2",
+  "play" %% "play-java-jpa" % "2.1-RC3", // temporary fix for cloudfoundry deploy https://cloudfoundry.atlassian.net/browse/CF-235
   "eu.byjean" %% "play2-oauth2" % "1.0-SNAPSHOT"
   ) }
 
