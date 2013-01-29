@@ -1,0 +1,10 @@
+---
+applications:
+- name: xpua
+  framework: play
+  runtime: java7
+  memory: 512M
+  instances: 1
+  url: xpua.${target-base}
+  command: start -Dconfig.resource=prod.conf
+  path: dist/xpua-1.0.zip
