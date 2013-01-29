@@ -1,10 +1,10 @@
 package controllers
 
-import play.api._
 import play.api.mvc._
+import lib.mvc.AuthenticatedAction
 
 trait Application extends Controller {
-  def index = Action {
+  def index = AuthenticatedAction { request =>
     Ok("index")
   }
 }
