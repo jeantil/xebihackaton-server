@@ -34,8 +34,6 @@ function UserMapController($scope, $http) {
                         label: fan.name
                     });
                 });
-
-
             });
         }
     });
