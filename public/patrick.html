@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/app.css">
+    <link rel='stylesheet' type='text/css' href='css/box.css'>
+    <script type="text/javascript" src="js/vendor/modernizr.custom.css3d.js"></script>
+
+  </head>
+  <body id="body">
+
+<!-- credits to http://www.eleqtriq.com/2010/11/natural-object-rotation-with-css3-3d/ -->
+
+<section id="stage">
+  <article id="box">
+
+    <section id="front">
+      <img id="head" src="images/Badge-Star-80.png" alt="avatar head" title="avatar head" width="20" height="20"/>
+      <!-- <img id="hair" src="img/icons/boxavatar-icon-110-hair.png" alt="avatar head" title="avatar head" width="110" height="109"/> -->
+    </section>
+
+<style>
+#head {
+  border-radius: 100px;
+  background-color: transparent !important;
+  border:10px solid red;
+}
+</style>
+
+    <section id="top">box-top</section>
+
+    <section id="bottom">box-bottom</section>
+
+    <section id="back">
+    </section>
+
+    <section id="left">
+          <h2>ok</h2>
+    </section>
+
+    <section id="right">
+          <h1>ok</h1>
+    </section>
+  </article>
+</section>
+
+
+<script type="text/javascript">
+    
+     Modernizr.load({
+        test: Modernizr.csstransforms3d,
+        yep : 'js/vendor/traqball.js',
+        nope: 'js/vendor/traqball_alternative.js'
+    });
+
+
+
+    </script>
+
+  </body>
+</html>
