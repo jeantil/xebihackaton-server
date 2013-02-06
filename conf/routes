@@ -10,3 +10,14 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /auth/login                 controllers.Auth.signin
 GET     /auth/logout                controllers.Auth.signout
 GET     /auth/callback              controllers.Auth.callback
+
+
+POST   /users/:id                   controllers.Users.update(id:String)
+
+# POST     /users/:id/artists           controllers.User.
+# GET     /users/:id/artists           controllers.User.
+# PUT     /users/:id/artists           controllers.User.
+# DELETE     /users/:id/artists           controllers.User.
+# GET    /search
+# /artists-map/:lat:long
+# /users-map/:lat:long
