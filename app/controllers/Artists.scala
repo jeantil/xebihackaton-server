@@ -1,0 +1,32 @@
+package controllers
+
+import lib.mvc.AuthenticatedAction
+import play.api.mvc._
+import play.api.libs.json.Json._
+
+import model.model.{Artist, Position}
+import model.model.Formats._
+
+
+
+
+trait Artists extends Controller {
+  def listmap(lat:Long, long:Long, radius:Long)= AuthenticatedAction { request =>
+    val latitude=BigDecimal(lat)
+    val longitude=BigDecimal(long)
+    val rad=BigDecimal(radius)
+
+    val artists=Seq(
+     Artist("1", "Justin Bieber" ,Position(48.8753,2.3112))
+    ,Artist("2", "Marylin Manson" ,Position(48.8760,2.3134))
+    ,Artist("3", "France Gall" ,Position(48.8804,2.3344))
+    ,Artist("4", "Shakira" ,Position(48.8560,2.3321))
+    ,Artist("5", "Lady GaGa" ,Position(48.8760,2.3134))
+    ,Artist("6", "Psy" ,Position(48.866,2.3111))
+    ,Artist("7", "Amadeus Mozart" ,Position(49.8760,2.3224))
+    )
+    Ok(toJson(artists))
+  }
+}
+
+object Artists extends Artists
