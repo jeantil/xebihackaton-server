@@ -1,4 +1,4 @@
-angular.module('yawil').factory('searchService', function ($http) {
+angular.module('yawil').factory('searchService', function ($http, userService) {
     var service = function () {
         this.selectedArtists = [
             {
@@ -27,7 +27,9 @@ angular.module('yawil').factory('searchService', function ($http) {
 
             if (!alreadyAdded) {
                 this.selectedArtists.push(artistToAdd);
-                $http.post("/users/1/artists/" + artistToAdd.id);
+                userService.currentUser().then(function(user) {
+                    $http.post("/users/" + user.id + "/artists/" + artistToAdd.id);
+                })
             }
 
             return this.selectedArtists;
@@ -37,7 +39,9 @@ angular.module('yawil').factory('searchService', function ($http) {
             this.selectedArtists = _.reject(this.selectedArtists, function (artist) {
                 return artist.id == artistToRemove.id;
             });
-            $http.delete("/users/1/artists/" + artistToRemove.id);
+            userService.currentUser().then(function(user) {
+                $http.delete("/users/" + user.id + "/artists/" + artistToRemove.id);
+            })
 
             return this.selectedArtists;
         };

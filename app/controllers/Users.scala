@@ -21,6 +21,12 @@ trait Users extends Controller {
   def addArtist(idUser:String,idArtist:String) = AuthenticatedAction { request =>
     Ok
   }
+
+  def current = AuthenticatedAction { request =>
+    val user=User("12345", "John Doe", Some(Position(48.8753,2.3112)), "jdoe@xebia.fr")
+
+    Ok(toJson(user))
+  }
 }
 
 object Users extends Users

@@ -11,7 +11,7 @@ GET     /auth/login                 controllers.Auth.signin
 GET     /auth/logout                controllers.Auth.signout
 GET     /auth/callback              controllers.Auth.callback
 
-
+GET     /user                       controllers.Users.current
 POST   /users/:id                   controllers.Users.update(id:String)
 
 POST     /users/:idUser/artists/:idArtist           controllers.Users.addArtist(idUser:String,idArtist:String)
