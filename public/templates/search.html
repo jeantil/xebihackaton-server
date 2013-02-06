@@ -1,5 +1,5 @@
 <form name="searchForm" class="form-search">
-    <input type="text" name="search" class="input-medium search-query"
+    <input type="text" name="search" class="input-medium search-query" autocomplete="off"
            placeholder="Search your favorite artist" ng-model="searchTerm"/>
 
 </form>
@@ -9,5 +9,5 @@
 </div>
 
 <div class="selected-artists">
-    <div ng-repeat="artist in selectedArtists">{{artist.name}}</div>
+    <div class="selected-artist" ng-repeat="artist in selectedArtists" >{{artist.name}} <button ng-click="removeArtist(artist)">X</button></div>
 </div>
