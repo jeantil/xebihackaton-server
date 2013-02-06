@@ -53,6 +53,7 @@ object ApplicationBuild extends Build {
   val appDependencies = { Seq(
     "org.xerial" % "sqlite-jdbc" % "3.7.2",
     "play" %% "play-java-jpa" % "2.1-RC3", // temporary fix for cloudfoundry deploy https://cloudfoundry.atlassian.net/browse/CF-235
+    "be.nextlab" %% "neo4j-rest-play-plugin" % "0.0.4-SNAPSHOT",
     "eu.byjean" %% "play2-oauth2" % "1.0-SNAPSHOT"
   ) }
 
