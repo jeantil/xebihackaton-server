@@ -17,7 +17,7 @@
 
     <div class="artist-events">
         <div class="artist-event" ng-repeat="event in artistEvents" >
-            <img class="event-icon" src="./images/icons/{{event.icon}}.png">
+            <img class="event-icon" ng-src="./images/icons/{{event.icon}}.png">
             <div class="content">
                 <span class="artist-name">
                     {{event.artist}}
