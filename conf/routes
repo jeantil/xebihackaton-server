@@ -20,4 +20,7 @@ POST     /users/:idUser/artists/:idArtist           controllers.Users.addArtist(
 DELETE     /users/:idUser/artists/:idArtist           controllers.Users.removeArtist(idUser:String,idArtist:String)
 # GET    /search
 GET /artists-map/:lat/:long/:radius controllers.Artists.listmap(lat:Double, long:Double, radius:Double)
-# /users-map/:lat:long
+
+
+GET      /artists                       controllers.Artists.startingWith(q:String)
+GET      /users-map/:artistId           controllers.Users.fanOfArtist(artistId:Long)

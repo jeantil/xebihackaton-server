@@ -1,4 +1,4 @@
-function UserMapController($scope) {
+function UserMapController($scope, $http) {
 
     angular.extend($scope, {
         center: {
@@ -9,33 +9,35 @@ function UserMapController($scope) {
         zoom: 9 // the zoom level
     });
 
-    //TODO récupérer la liste des artistes
-    $scope.artists = [
-        {id: 3, label: "dada", value: "dadaaaaaa"}
-    ];
+    $scope.artists = [];
+
+    $scope.$watch('artistName', function () {
+        $http.get('/artists?q=' + $scope.artistName).success(function (artists) {
+            $scope.artists = _.map(artists, function (artist) {
+                return {
+                    id: artist.id,
+                    label: artist.name,
+                    value: artist.name
+                };
+            });
+        });
+    });
 
     $scope.$watch('artist', function () {
         var idArtist = $scope.artist;
         if (idArtist) {
-            //TODO récupérer la liste des fans
-            var fans = [
-                {
-                    position: {
-                        lat: 48.84,
-                        lng: 2.34
-                    },
-                    name: 'JOHNSON'
-                }
-            ];
-            _.forEach(fans, function (fan) {
-                $scope.markers.push({
-                    latitude: parseFloat(fan.position.lat),
-                    longitude: parseFloat(fan.position.lng),
-                    label: fan.name
+            $http.get('/users-map/' + idArtist).success(function (fans) {
+                _.forEach(fans, function (fan) {
+                    $scope.markers.push({
+                        latitude: parseFloat(fan.city.lat),
+                        longitude: parseFloat(fan.city.lng),
+                        label: fan.name
+                    });
                 });
+
+
             });
         }
     });
-
 
 };
