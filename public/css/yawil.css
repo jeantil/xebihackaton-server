@@ -117,6 +117,10 @@ body {
   background-color: #112c52;
 }
 
+.search-results {
+    /* display: none; */
+}
+
 .search-result {
   cursor: pointer;
   height: 30px;
@@ -140,4 +144,44 @@ body {
 
 .favorite-artist:hover {
     background-color: #D7D7D7;
+}
+
+
+/* artist events */
+
+.artist-event {
+    position: relative;
+    height: 64px;
+    cursor: pointer;
+    border: solid grey 1px;
+    border-radius: 5px;
+    background-color: #F1F1F1;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.artist-event:hover {
+    background-color: #D7D7D7;
+}
+
+.artist-event .event-icon {
+    float: left;
+    width: 64px;
+    height: 64px;
+}
+
+.artist-event .content {
+    float: left;
+    padding-left: 10px;
+}
+
+.artist-event .content .artist-name {
+    font-weight: bold;
+}
+
+.artist-event .btn-buy {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+
 }
