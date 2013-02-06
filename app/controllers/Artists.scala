@@ -11,11 +11,12 @@ import model.model.Formats._
 
 
 trait Artists extends Controller {
-  def listmap(lat:Long, long:Long, radius:Long)= AuthenticatedAction { request =>
+  def listmap(lat:Double, long:Double, radius:Double)= AuthenticatedAction { request =>
     val latitude=BigDecimal(lat)
     val longitude=BigDecimal(long)
     val rad=BigDecimal(radius)
 
+    val ref=Position(latitude, longitude)
     val artists=Seq(
      Artist("1", "Justin Bieber" ,Position(48.8753,2.3112))
     ,Artist("2", "Marylin Manson" ,Position(48.8760,2.3134))
@@ -24,7 +25,7 @@ trait Artists extends Controller {
     ,Artist("5", "Lady GaGa" ,Position(48.8760,2.3134))
     ,Artist("6", "Psy" ,Position(48.866,2.3111))
     ,Artist("7", "Amadeus Mozart" ,Position(49.8760,2.3224))
-    )
+    )//.filter { artist =>  rad <= ref.distance(artist.position) }
     Ok(toJson(artists))
   }
 }
