@@ -123,6 +123,12 @@ package object model {
       val qb = QueryBuilder().query(Json.obj( "email" -> email ))
       collection.find[User](qb).headOption()
     }
+    def findById(id: String): Future[Option[User]] = {
+      import play.modules.reactivemongo.PlayBsonImplicits._
+      import BsonFormats.UserBSONReader
+      val qb = QueryBuilder().query(Json.obj( "id" -> id ))
+      collection.find[User](qb).headOption()
+    }
 
     def orCreate(u:User):Future[User]={
       def newUser=User(Some(BSONObjectID.generate), u.id,u.name, u.city,u.email)

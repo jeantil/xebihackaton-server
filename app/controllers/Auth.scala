@@ -28,7 +28,7 @@ object Auth extends Controller {
             for {
               user <- GoogleOAuth2.authenticate[User](code)
               savedUser <- User.orCreate(user)
-            } yield Redirect(routes.Application.index()).withSession("login" -> user.id)
+            } yield Redirect(routes.Application.index()).withSession("login" -> user.email)
         } getOrElse Future.successful(Unauthorized)
       }
   }
