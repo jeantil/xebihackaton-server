@@ -6,8 +6,8 @@ angular.module('yawil', ['google-maps'])
                 controller:RegistrationController
             })
             .when('/home', {
-                templateUrl:'templates/search.html',
-                controller:SearchController
+                templateUrl:'templates/home.html',
+                controller:HomeController
             })
             .when('/map/artist', {
                 templateUrl:'templates/artist-map.html',

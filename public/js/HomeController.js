@@ -1,4 +1,4 @@
-function SearchController($scope, searchService, $http) {
+function HomeController($scope, searchService, $http) {
 
     $scope.selectedArtists = searchService.selectedArtists;
 
