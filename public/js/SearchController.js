@@ -1,49 +1,18 @@
-function SearchController($scope) {
+function SearchController($scope, searchService) {
     $scope.searchTerm = '';
 
 
+    $scope.selectedArtists = searchService.selectedArtists;
     $scope.addArtist = function (artistToAdd) {
-        var alreadyAdded = _.filter($scope.selectedArtists,function (artist) {
-            return artist.id == artistToAdd.id;
-        }).length > 0;
-        if (alreadyAdded) {
-            return;
-        }
-
-        $scope.selectedArtists.push(artistToAdd);
+        $scope.selectedArtists = searchService.addArtist(artistToAdd);
     };
-
     $scope.removeArtist = function (artistToRemove) {
-        $scope.selectedArtists = _.reject($scope.selectedArtists, function (artist) {
-            return artist.id == artistToRemove.id;
-        });
+        $scope.selectedArtists = searchService.removeArtist(artistToRemove);
     };
-
-    // TODO : ajax call to get list
-    $scope.selectedArtists = [
-        {
-            id: 1,
-            name: "Justin bieber",
-            position: {
-                lat: 36,
-                lng: 10
-            }
-        },
-        {
-            id: 2,
-            name: "Bob L'eponge",
-            position: {
-                lat: 36,
-                lng: 10
-            }
-        }
-
-    ];
 
     $scope.searchResults = [];
     var searchForTerm = function () {
         if ($scope.searchTerm) {
-            console.log('search term');
             //TODO Faire un appel coté serveur
             $scope.searchResults = [
                 {
