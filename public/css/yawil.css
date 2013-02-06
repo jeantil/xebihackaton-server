@@ -1,3 +1,28 @@
+/* navbar */
+
+.navbar {
+    height: 64px;
+    margin-bottom: 10px;
+}
+
+.navbar-inner {
+    height: 100%;
+}
+
+.navbar .header-image {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+
+.navbar .brand {
+    font-size: 32px;
+    line-height: 44px;
+}
+
+
+/* map */
+
 #gmap {
     border: 1px solid black;
     display: inline-block;
@@ -8,11 +33,14 @@
 }
 
 
+/* search page */
+
 .search-results {
-    border: solid black 1px;
+    border: solid 1px #D7D7D7;
     float: left;
     width: 45%;
     min-height: 100px;
+    margin-right: 10px;
 
 }
 
@@ -22,8 +50,13 @@
 }
 
 .selected-artists {
-    border: solid black 1px;
+    border: solid 1px #D7D7D7;
     float: left;
     width: 45%;
     min-height: 100px;
+}
+
+
+.selected-artist {
+
 }
