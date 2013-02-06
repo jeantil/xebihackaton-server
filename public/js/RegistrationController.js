@@ -1,4 +1,5 @@
 function RegistrationController($scope, $location) {
+
     angular.extend($scope, {
         center: {
             lat: 48.85, // initial map center latitude
@@ -8,15 +9,8 @@ function RegistrationController($scope, $location) {
         zoom: 12 // the zoom level
     });
 
-    $scope.isMapElementHidden = true;
-    var geocoder = new google.maps.Geocoder();
-    setTimeout(function () {
-        $scope.isMapElementHidden = false;
-        $scope.$apply();
-    }, 200);
-
     $scope.localisation = '';
-
+    var geocoder = new google.maps.Geocoder();
     $scope.hasLocation = false;
     var searchForLocation = function () {
         geocoder.geocode({ 'address': $scope.localisation}, function (results, status) {
@@ -29,6 +23,7 @@ function RegistrationController($scope, $location) {
                     lat: latitude,
                     lng: longitude
                 };
+
                 $scope.markers = [
                     {
                         latitude: parseFloat(latitude),

@@ -2,7 +2,7 @@
        <input type="text" placeholder="Your Localisation" name="localisation" ng-model="localisation" required />
        <input type="submit" value="Enter your localisation" ng-click="register(registrationForm.$valid)"/>
 </form>
-<div class="gmap-wrapper">
+<div ng-controller="MapController" class="gmap-wrapper">
     <google-map id="gmap" center="center" draggable="true" refresh="!isMapElementHidden" zoom="zoom" markers="markers"
                 style="height: 600px; width:100%"></google-map>
 </div>
