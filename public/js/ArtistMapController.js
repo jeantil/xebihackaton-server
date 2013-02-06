@@ -54,7 +54,8 @@ function ArtistMapController($scope) {
                 _.forEach(artists, function (artist) {
                     $scope.markers.push({
                         latitude: parseFloat(artist.position.lat),
-                        longitude: parseFloat(artist.position.lng)
+                        longitude: parseFloat(artist.position.lng),
+                        label: artist.name
                     });
                 });
 

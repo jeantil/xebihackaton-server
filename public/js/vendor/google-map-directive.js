@@ -40,7 +40,7 @@
      *
      * @see http://stackoverflow.com/a/588014
      */
-    function floatEqual (f1, f2) {
+    function floatEqual(f1, f2) {
         return (Math.abs(f1 - f2) < 0.000001);
     }
 
@@ -69,6 +69,8 @@
                 o = angular.extend({}, _defaults, opts),
                 that = this;
 
+            var _infoWindows = [];
+
             this.center = opts.center;
             this.zoom = o.zoom;
             this.draggable = o.draggable;
@@ -91,7 +93,7 @@
                         center: that.center,
                         zoom: that.zoom,
                         draggable: that.draggable,
-                        mapTypeId : google.maps.MapTypeId.ROADMAP
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
 
                     google.maps.event.addListener(_instance, "dragstart",
@@ -171,41 +173,40 @@
                 }
             };
 
-            this.on = function(event, handler) {
+            this.on = function (event, handler) {
                 _handlers.push({
                     "on": event,
                     "handler": handler
                 });
             };
 
-            this.addLine = function(from, to, color, weight) {
+            this.addLine = function (from, to, color, weight) {
                 var latLngOrigin = new google.maps.LatLng(from.latitude, from.longitude);
                 var latLngDestination = new google.maps.LatLng(to.latitude, to.longitude);
                 var line = new google.maps.Polyline({
-                  path: [latLngOrigin,latLngDestination],
-                  strokeColor: color,
-                  strokeOpacity: 1.0,
-                  strokeWeight: weight
-              });
+                    path: [latLngOrigin, latLngDestination],
+                    strokeColor: color,
+                    strokeOpacity: 1.0,
+                    strokeWeight: weight
+                });
 
-              var circleOrigin = new google.maps.Circle({
-                  fillColor:color,
-                  strokeColor:'#000',
-                  strokeWeight:2,
-                  fillOpacity: 1.0,
-                  radius:30,
-                  center:latLngOrigin
-              });
+                var circleOrigin = new google.maps.Circle({
+                    fillColor: color,
+                    strokeColor: '#000',
+                    strokeWeight: 2,
+                    fillOpacity: 1.0,
+                    radius: 30,
+                    center: latLngOrigin
+                });
 
-              line.setMap(_instance);
-              circleOrigin.setMap(_instance);
+                line.setMap(_instance);
+                circleOrigin.setMap(_instance);
 
                 // Return marker instance
                 return line;
             };
 
-            this.addMarker = function (lat, lng, label, url,
-                                       thumbnail) {
+            this.addMarker = function (lat, lng, label, url, thumbnail) {
 
                 if (that.findMarker(lat, lng) != null) {
                     return;
@@ -217,7 +218,17 @@
                 });
 
                 if (label) {
-
+                    var infowindow = new google.maps.InfoWindow({
+                        content: label,
+                        size: new google.maps.Size(50, 50)
+                    });
+                    _infoWindows.unshift(infowindow);
+                    google.maps.event.addListener(marker, 'click', function () {
+                        _.forEach(_infoWindows, function (infoWindow) {
+                            infoWindow.close();
+                        });
+                        infowindow.open(_instance, marker);
+                    });
                 }
 
                 if (url) {
@@ -299,6 +310,7 @@
                         index = s.findMarkerIndex(lat, lng);
 
                     // Remove from local arrays
+                    _infoWindows.splice(index, 1);
                     _markers.splice(index, 1);
                     s.markers.splice(index, 1);
 
@@ -321,8 +333,7 @@
     /**
      * Map directive
      */
-    googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function ($log, $timeout,
-                                                                                      $filter) {
+    googleMapsModule.directive("googleMap", ["$log", "$timeout", "$filter", function ($log, $timeout, $filter) {
 
         return {
             restrict: "EC",
@@ -353,8 +364,7 @@
                 // Center property must be specified and provide lat &
                 // lng properties
                 if (!angular.isDefined(scope.center) ||
-                    (!angular.isDefined(scope.center.lat) ||
-                        !angular.isDefined(scope.center.lng))) {
+                    (!angular.isDefined(scope.center.lat) || !angular.isDefined(scope.center.lng))) {
 
                     $log.error("Could not find a valid center property");
 
@@ -458,12 +468,12 @@
                     });
                 }
 
-                scope.$watch("googleLines", function(newValue, oldValue){
+                scope.$watch("googleLines", function (newValue, oldValue) {
                     $timeout(function () {
 
-                           angular.forEach(newValue, function(v){
-                               _m.addLine(v.from, v.to, v.color, v.weight);
-                           });
+                        angular.forEach(newValue, function (v) {
+                            _m.addLine(v.from, v.to, v.color, v.weight);
+                        });
 
                     });
 
@@ -476,7 +486,7 @@
 
                         angular.forEach(newValue, function (v, i) {
                             if (!_m.hasMarker(v.latitude, v.longitude)) {
-                                _m.addMarker(v.latitude, v.longitude);
+                                _m.addMarker(v.latitude, v.longitude, v.label);
                             }
                         });
 
