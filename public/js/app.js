@@ -2,27 +2,26 @@ angular.module('yawil', ['google-maps'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/registration', {
-                templateUrl:'templates/registration.html',
-                controller:RegistrationController
+                templateUrl: 'templates/registration.html',
+                controller: RegistrationController
             })
             .when('/home', {
-                templateUrl:'templates/home.html',
-                controller:HomeController
+                templateUrl: 'templates/home.html',
+                controller: HomeController
             })
             .when('/map/artist', {
-                templateUrl:'templates/artist-map.html',
-                controller:ArtistMapController
+                templateUrl: 'templates/artist-map.html',
+                controller: ArtistMapController
             })
             .when('/map/user', {
-                templateUrl:'templates/user-map.html',
-                controller:UserMapController
+                templateUrl: 'templates/user-map.html',
+                controller: UserMapController
             })
-            .otherwise({redirectTo:'/registration'});
+            .otherwise({redirectTo: '/registration'});
     }]);
 
 
-var NavBarController = function($scope, searchService, $http) {
-
+var NavBarController = function ($scope, searchService, $http, $rootScope, $location) {
 
     $scope.searchTerm = '';
 
@@ -58,6 +57,18 @@ var NavBarController = function($scope, searchService, $http) {
     };
     $scope.$watch('searchTerm', _.debounce(searchForTerm, 300));
 
+
+    $rootScope.goToArtist = function () {
+        $location.path('/map/artist');
+    };
+
+    $rootScope.goToFan = function () {
+        $location.path('/map/user');
+    };
+
+    $rootScope.goToHome = function () {
+        $location.path('/home');
+    };
 
 }
 
