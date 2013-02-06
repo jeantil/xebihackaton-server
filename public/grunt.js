@@ -16,16 +16,6 @@ module.exports = function(grunt) {
       }
     },
 
-    mincss: {
-      compress: {
-        files: {
-          "styles/main.min.css": [
-            "css/yawil.css"
-          ]
-        }
-      }
-    },
-
     reload: {
       port: 6001,
       proxy: {
@@ -36,7 +26,7 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['css/*.less', "*.html", "scripts/*.js"],
-      tasks: 'less mincss reload'
+      tasks: 'less reload'
     }
   });
   
