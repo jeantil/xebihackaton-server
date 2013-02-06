@@ -38,7 +38,7 @@
 .search-results {
     border: solid 1px #D7D7D7;
     float: left;
-    width: 45%;
+    width: 65%;
     min-height: 100px;
     margin-right: 10px;
     padding: 5px 5px;
@@ -68,7 +68,7 @@
 .selected-artists {
     border: solid 1px #D7D7D7;
     float: left;
-    width: 45%;
+    width: 25%;
     min-height: 100px;
     padding: 5px 5px;
 }
