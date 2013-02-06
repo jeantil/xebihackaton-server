@@ -207,7 +207,7 @@ package object model {
     }
 
     def db = { ReactiveMongoPlugin.db }
-    def collection= { db("users") }
+    def collection= { db("artists") }
 
     def list(): Future[List[Artist]] = {
       import BsonFormats.ArtistBSONReader
@@ -217,7 +217,7 @@ package object model {
     def findByName(name: String): Future[Seq[Artist]] = {
       import play.modules.reactivemongo.PlayBsonImplicits._
       import BsonFormats.ArtistBSONReader
-      val qb = QueryBuilder().query(BSONDocument( "name" -> BSONRegex(s"${name}.*","i") ))
+      val qb = QueryBuilder().query(BSONDocument( "name" -> BSONRegex(s"${name}.*","") ))
       collection.find[Artist](qb).toList()
     }
 
@@ -248,7 +248,7 @@ package object model {
     }
 
     def count():Future[Int] = {
-      ReactiveMongoPlugin.db.command(Count("users"))
+      ReactiveMongoPlugin.db.command(Count("artists"))
     }
 
   }
