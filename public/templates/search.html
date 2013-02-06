@@ -1,1 +1,9 @@
-TEST
+<form name="searchForm" class="form-search">
+    <input type="text" name="search" class="input-medium search-query"
+           placeholder="Search your favorite artist" ng-model="searchTerm"/>
+
+</form>
+
+<div class="search-result">
+    <div ng-repeat="artist in searchResults">{{artist.name}}</div>
+</div>

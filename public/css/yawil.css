@@ -1,0 +1,8 @@
+#gmap {
+    border: 1px solid black;
+    display: inline-block;
+}
+
+#gmap img {
+    max-width: none;
+}
