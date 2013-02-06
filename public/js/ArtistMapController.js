@@ -1,13 +1,6 @@
-function ArtistMapController($scope, mapService, $http) {
-
-    //TODO centrer sur les coordonnées de l'utilisateur
-    var cityOfUser = {
-
-    };
+function ArtistMapController($scope, mapService, $http, userService) {
 
     var searchRadius = 5;
-
-    $scope.displayedArtists = [];
 
     angular.extend($scope, {
         center: {
@@ -18,6 +11,19 @@ function ArtistMapController($scope, mapService, $http) {
         zoom: 9 // the zoom level
     });
 
+    userService.currentUser().then(function (user) {
+        var city = user.city;
+        $scope.center = {
+            lat: city.lat,
+            lng: city.lng
+        };
+        $scope.zoom = 12;
+        mapService.reverseGeocode(city.lat, city.lng, function (address) {
+            $scope.localisation = address[2].long_name + ',' + address[4].long_name;
+        });
+    });
+
+    $scope.displayedArtists = [];
     var searchForLocation = function () {
 
         mapService.geocode($scope.localisation, function (centerLocation) {

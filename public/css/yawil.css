@@ -86,7 +86,6 @@ body {
 
 .favorite-artists {
   min-height: 100px;
-  background-color: white;
 }
 .favorite-artist {
   cursor: pointer;
@@ -95,6 +94,7 @@ body {
   border: solid grey 1px;
     border-radius: 5px;
     margin-bottom: 10px;
+    background-color: #F1F1F1;
 
 }
 
