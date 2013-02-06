@@ -47,7 +47,7 @@ function RegistrationController($scope, mapService, $location) {
     $scope.$watch('localisation', _.debounce(searchForLocation, 1000));
     $scope.register = function (isValid) {
         if (isValid && $scope.hasLocation) {
-            $location.path('/search');
+            $location.path('/home');
         }
     }
 
