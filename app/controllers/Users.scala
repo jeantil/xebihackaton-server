@@ -24,7 +24,8 @@ trait Users extends Controller {
   }
 
   def current = AuthenticatedAction { request =>
-    val user=User("12345", "John Doe", Some(Position(48.8753,2.3112)), "jdoe@xebia.fr")
+    import reactivemongo.bson.BSONObjectID
+    val user=User(Some(BSONObjectID.generate), "12345", "John Doe", Some(Position(48.8753,2.3112)), "jdoe@xebia.fr")
 
     Ok(toJson(user))
   }
