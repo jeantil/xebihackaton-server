@@ -10,6 +10,7 @@ function UserMapController($scope, $http) {
     });
 
     $scope.artists = [];
+    $scope.artistName = '';
 
     $scope.$watch('artistName', function () {
         $http.get('/artists?q=' + $scope.artistName).success(function (artists) {

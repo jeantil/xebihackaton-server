@@ -1,16 +1,40 @@
 
-<h3 class="section-title">
-    My favorite artists
-</h3>
+<div ng-show="selectedArtists.length > 0">
+    <h3 class="section-title">
+        My favorite artists
+    </h3>
 
-<div class="favorite-artists">
-    <div class="favorite-artist" ng-repeat="artist in selectedArtists" >{{artist.name}} <button class="remove-button" ng-click="removeArtist(artist)">X</button></div>
+    <div class="favorite-artists">
+        <div class="favorite-artist" ng-repeat="artist in selectedArtists" >{{artist.name}} <button class="remove-button" ng-click="removeArtist(artist)">X</button></div>
+    </div>
 </div>
 
-<h3 class="section-title">
-    My future events
-</h3>
 
+<div ng-show="artistEvents.length > 0">
+    <h3 class="section-title">
+        My future events
+    </h3>
+
+    <div class="artist-events">
+        <div class="artist-event" ng-repeat="event in artistEvents" >
+            <img class="event-icon" ng-src="./images/icons/{{event.icon}}.png">
+            <div class="content">
+                <span class="artist-name">
+                    {{event.artist}}
+                </span>
+                <span> : </span>
+                {{event.title}}
+                <br/>
+                <br/>
+                {{event.date}}
+                {{event.description}}
+
+                <div ng-show="true" class="btn-buy btn btn-success">purchase</div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
     <button class="go-to-artist" ng-click="goToArtist()" >Artist near ...</button>

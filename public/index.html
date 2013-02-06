@@ -37,7 +37,7 @@
                  placeholder="Search your favorite artist" ng-model="searchTerm"/>
 
       </form>
-      <div class="search-results" ng-show="searchResults.length > 0">
+      <div class="search-results" ng-hide="searchResults.length == 0">
           <div class="search-result artist-box" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
       </div>
       <div class="header-image">

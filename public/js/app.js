@@ -23,9 +23,10 @@ angular.module('yawil', ['google-maps'])
 
 var NavBarController = function ($scope, searchService, $http, $rootScope, $location) {
 
+
     $scope.searchTerm = '';
 
-    $scope.selectedArtists = searchService.selectedArtists;
+    $rootScope.selectedArtists = searchService.selectedArtists;
 
     $scope.addArtist = function (artistToAdd) {
         $scope.selectedArtists = searchService.addArtist(artistToAdd);
@@ -33,7 +34,7 @@ var NavBarController = function ($scope, searchService, $http, $rootScope, $loca
     };
 
     $scope.removeArtist = function (artistToRemove) {
-        $scope.selectedArtists = searchService.removeArtist(artistToRemove);
+        $rootScope.selectedArtists = searchService.addArtist(artistToAdd);
     };
 
     $scope.searchResults = [];

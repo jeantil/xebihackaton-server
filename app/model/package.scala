@@ -32,7 +32,7 @@ package object model {
       BigDecimal(d)
     }
   }
-  case class Artist(id:String,name:String,position:Position){
+  case class Artist(oid:Option[BSONObjectID],id:String,name:String,position:Position){
   }
   case class Concert(position:Position){}
 
@@ -66,7 +66,17 @@ package object model {
 
     implicit val userWrites=Json.writes[User]
 
-    implicit val artistReads=Json.reads[Artist]
+//    implicit val artistReads=Json.reads[Artist]
+    implicit object artistReads extends Reads[Artist]{
+      def reads(json: JsValue) = {
+        JsSuccess(Artist(
+          (json \ "_id"\"oid").asOpt[String].map(BSONObjectID(_) ),
+          (json \ "id").as[String],
+          (json \ "name").as[String],
+          (json \ "position").as[Position]
+        ))
+      }
+    }
     implicit val artistWrites=Json.writes[Artist]
 
     implicit val concertReads=Json.reads[Concert]
@@ -152,6 +162,88 @@ package object model {
 
 //    def create(id:String,name: String, email: String, verifiedId: String): Future[User] = {
     def create(user:User): Future[User] = {
+      save(user)
+    }
+
+    def count():Future[Int] = {
+      ReactiveMongoPlugin.db.command(Count("users"))
+    }
+
+  }
+  object Artist {
+    import scala.concurrent._
+    import play.Logger
+    import reactivemongo.bson._
+    import reactivemongo.core.commands.Count
+    import reactivemongo.bson.handlers._
+    import reactivemongo.bson.handlers.DefaultBSONHandlers.DefaultBSONDocumentWriter
+    import reactivemongo.bson.handlers.DefaultBSONHandlers.DefaultBSONReaderHandler
+    import reactivemongo.api._
+    import play.modules.reactivemongo._
+    import play.api.Play.current
+    import ExecutionContext.Implicits.global
+
+    object BsonFormats{
+      implicit object ArtistWriter extends RawBSONWriter[Artist] {
+        import play.modules.reactivemongo.PlayBsonImplicits._
+        import Formats.artistWrites
+        def write(user: Artist) = {
+          val jsUser=Json.toJson(user)
+          jsUser match {
+            case o: JsObject => JsObjectWriter.write(o)
+            case a: JsArray => JsArrayWriter.write(a)
+            case _ => throw new RuntimeException("JsValue can only JsObject/JsArray")
+          }
+        }
+      }
+
+      implicit object ArtistBSONReader extends BSONReader[Artist] {
+        import play.api.libs.json.Json.fromJson
+        import Formats.artistReads
+        def fromBSON(doc: BSONDocument):Artist= {
+          fromJson(JsValueReader.fromBSON(doc)).get
+        }
+      }
+    }
+
+    def db = { ReactiveMongoPlugin.db }
+    def collection= { db("users") }
+
+    def list(): Future[List[Artist]] = {
+      import BsonFormats.ArtistBSONReader
+      collection.find[BSONDocument,Artist](BSONDocument()).toList()
+    }
+
+    def findByName(name: String): Future[Seq[Artist]] = {
+      import play.modules.reactivemongo.PlayBsonImplicits._
+      import BsonFormats.ArtistBSONReader
+      val qb = QueryBuilder().query(BSONDocument( "name" -> BSONRegex(s"${name}.*","i") ))
+      collection.find[Artist](qb).toList()
+    }
+
+    def findById(id: String): Future[Option[Artist]] = {
+      import play.modules.reactivemongo.PlayBsonImplicits._
+      import BsonFormats.ArtistBSONReader
+      val qb = QueryBuilder().query(Json.obj( "id" -> id ))
+      collection.find[Artist](qb).headOption()
+    }
+
+    //    def orCreate(id:String,name: String, email: String,pos:Option[Position])(maybeUser:Option[User]):Future[User]={
+    //      maybeUser.fold(create(User(BSONObjectID.generate, id,name, pos,email))) (Future.successful)
+    //    }
+    //    def authenticate(name: String, email: String, verifiedId: String): Future[User] = {
+    //      Logger.info(s"Authenticate( ${name}, ${email}, ${verifiedId} )")
+    //      findByEmail(email).flatMap(orCreate(name: String, email: String, verifiedId: String) _)
+    //    }
+    def save(user:Artist):Future[Artist]={
+      import play.modules.reactivemongo.PlayBsonImplicits._
+      import BsonFormats.ArtistWriter
+      val selector = BSONDocument("_id" -> user.oid)
+      collection.update(selector,user,upsert=true).map(_=>user)
+    }
+
+    //    def create(id:String,name: String, email: String, verifiedId: String): Future[User] = {
+    def create(user:Artist): Future[Artist] = {
       save(user)
     }
 
