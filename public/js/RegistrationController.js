@@ -6,7 +6,7 @@ function RegistrationController($scope, $location) {
             lng: 2.35 // initial map center longitude
         },
         markers: [],
-        zoom: 12 // the zoom level
+        zoom: 9 // the zoom level
     });
 
     $scope.localisation = '';
@@ -31,7 +31,7 @@ function RegistrationController($scope, $location) {
                     }
                 ];
 
-                $scope.zoom = 14;
+                $scope.zoom = 12;
                 $scope.hasLocation = true;
                 $scope.$apply();
             } else {
