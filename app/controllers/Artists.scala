@@ -4,10 +4,8 @@ import lib.mvc.AuthenticatedAction
 import play.api.mvc._
 import play.api.libs.json.Json._
 
-import model.model.{Artist, Position}
-import model.model.Formats._
-
-
+import model.{Artist, Position}
+import model.Formats._
 
 
 trait Artists extends Controller {
