@@ -6,7 +6,7 @@ import play.api.libs.json.Json
 package object model {
   case class User(id:String,name:String,city:Option[Position],email:String)
   case class Position(lat:BigDecimal, lng:BigDecimal){
-    def distance(other:Position){
+    def distance(other:Position)={
       def toRad(number:BigDecimal)={
         number * Math.PI / 180
       }
@@ -30,7 +30,8 @@ package object model {
       BigDecimal(d)
     }
   }
-  case class Artist(id:String,name:String,position:Position){}
+  case class Artist(id:String,name:String,position:Position){
+  }
   case class Concert(position:Position){}
 
   object Formats {

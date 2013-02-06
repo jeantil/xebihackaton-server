@@ -25,7 +25,7 @@ trait Artists extends Controller {
     ,Artist("5", "Lady GaGa" ,Position(48.8760,2.3134))
     ,Artist("6", "Psy" ,Position(48.866,2.3111))
     ,Artist("7", "Amadeus Mozart" ,Position(49.8760,2.3224))
-    )//.filter { artist =>  rad <= ref.distance(artist.position) }
+    ).filter { artist =>  ref.distance(artist.position) <= rad }
     Ok(toJson(artists))
   }
 }
