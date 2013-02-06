@@ -41,13 +41,28 @@
     width: 45%;
     min-height: 100px;
     margin-right: 10px;
+    padding: 5px 5px;
 
 }
 
-.search-result {
+.artist-box {
+    position: relative;
     cursor: pointer;
     height: 30px;
-    padding: 3px;
+    line-height: 30px;
+    padding: 3px 10px;
+    border: solid grey 1px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background-color: #F7F7F7;
+}
+
+.artist-box:hover {
+    background-color: #D3D3D3;
+}
+
+.search-result {
+
 }
 
 .selected-artists {
@@ -55,10 +70,15 @@
     float: left;
     width: 45%;
     min-height: 100px;
+    padding: 5px 5px;
 }
 
 .selected-artist {
-    cursor: pointer;
-    height: 30px;
-    padding: 3px;
+
+}
+
+.selected-artist .remove-button {
+    position: absolute;
+    top: 4px;
+    right: 5px;
 }

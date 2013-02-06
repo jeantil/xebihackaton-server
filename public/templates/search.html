@@ -5,9 +5,9 @@
 </form>
 
 <div class="search-results">
-    <div class="search-result" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
+    <div class="search-result artist-box" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
 </div>
 
 <div class="selected-artists">
-    <div class="selected-artist" ng-repeat="artist in selectedArtists" >{{artist.name}} <button ng-click="removeArtist(artist)">X</button></div>
+    <div class="selected-artist artist-box" ng-repeat="artist in selectedArtists" >{{artist.name}} <button class="remove-button" ng-click="removeArtist(artist)">X</button></div>
 </div>
