@@ -217,7 +217,7 @@ package object model {
     def findByName(name: String): Future[Seq[Artist]] = {
       import play.modules.reactivemongo.PlayBsonImplicits._
       import BsonFormats.ArtistBSONReader
-      val qb = QueryBuilder().query(BSONDocument( "name" -> BSONRegex(s"${name}.*","") ))
+      val qb = QueryBuilder().query(BSONDocument( "name" -> BSONRegex(s"${name}.*","i") ))
       collection.find[Artist](qb).toList()
     }
 
