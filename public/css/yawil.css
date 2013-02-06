@@ -175,8 +175,9 @@ body {
 }
 
 .artist-event .content {
-    float: left;
-    padding-left: 10px;
+    position: absolute;
+    top: 5px;
+    left: 85px;
 }
 
 .artist-event .content .artist-name {
