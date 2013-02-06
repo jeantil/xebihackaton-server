@@ -27,15 +27,21 @@
       <script src="js/UserService.js"></script>
   </head>
   <body ng-app="yawil">
-  <div class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar navbar-inverse navbar-static-top" ng-controller="NavBarController">
       <div class="navbar-inner">
           <a class="brand">YAWYL</a>
       </div>
+      <form name="searchForm" class="nav-search">
+          <input type="text" name="search" class="input-medium nav-search-query" autocomplete="off"
+                 placeholder="Search your favorite artist" ng-model="searchTerm"/>
+
+      </form>
+      <div class="search-results" ng-show="searchResults.length > 0">
+          <div class="search-result artist-box" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
+      </div>
       <div class="header-image">
           <img height="64" width="64" src="images/iphone-convex-256.png"/>
-
       </div>
-
   </div>
   <div class="container" ng-view></div>
   </body>

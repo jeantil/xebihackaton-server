@@ -1,13 +1,12 @@
-<form name="searchForm" class="form-search">
-    <input type="text" name="search" class="input-medium search-query" autocomplete="off"
-            ng-model="searchTerm"/>
 
-</form>
+<h3 class="section-title">
+    My favorite artists
+</h3>
 
-<div class="search-results">
-    <div class="search-result artist-box" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
+<div class="favorite-artists">
+    <div class="favorite-artist" ng-repeat="artist in selectedArtists" >{{artist.name}} <button class="remove-button" ng-click="removeArtist(artist)">X</button></div>
 </div>
 
-<div class="selected-artists">
-    <div class="selected-artist artist-box" ng-repeat="artist in selectedArtists" >{{artist.name}} <button class="remove-button" ng-click="removeArtist(artist)">X</button></div>
-</div>
+<h3 class="section-title">
+    My future events
+</h3>
