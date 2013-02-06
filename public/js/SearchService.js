@@ -27,6 +27,7 @@ angular.module('yawil').factory('searchService', function ($http) {
 
             if (!alreadyAdded) {
                 this.selectedArtists.push(artistToAdd);
+                $http.post("/users/1/artists/" + artistToAdd.id);
             }
 
             return this.selectedArtists;
@@ -36,6 +37,7 @@ angular.module('yawil').factory('searchService', function ($http) {
             this.selectedArtists = _.reject(this.selectedArtists, function (artist) {
                 return artist.id == artistToRemove.id;
             });
+            $http.delete("/users/1/artists/" + artistToRemove.id);
 
             return this.selectedArtists;
         };
