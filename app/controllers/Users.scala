@@ -6,7 +6,7 @@ import play.api.libs.json.Json._
 
 import model._
 import model.Formats._
-<<<<<<< HEAD
+
 import model.{Position, User}
 import scala.concurrent._
 import ExecutionContext.Implicits.global
@@ -35,6 +35,7 @@ trait Users extends Controller {
         user <- User.findByEmail(id).map( _.map{x=>Ok(toJson(x))}.getOrElse(Unauthorized))
       } yield user
     }
+  }
 
 
   def fanOfArtist(idOfArtist: Long) = AuthenticatedAction {
