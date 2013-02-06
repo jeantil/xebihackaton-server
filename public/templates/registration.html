@@ -1,6 +1,6 @@
 <form name="registrationForm" class="registration-form">
        <input type="text" placeholder="Your Localisation" name="localisation" ng-model="localisation" required class="submit-text" />
-       <input type="submit" value="Enter your localisation" class="submit-localisation" ng-click="register(registrationForm.$valid)"/>
+       <input type="submit" value="Enter your localisation & register" class="submit-localisation" ng-click="register(registrationForm.$valid)"/>
 </form>
 <div ng-controller="MapController" class="gmap-wrapper">
     <google-map id="gmap" center="center" draggable="true" refresh="!isMapElementHidden" zoom="zoom" markers="markers"
