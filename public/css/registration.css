@@ -1,4 +1,4 @@
-.submit-localisation {
+.submit-localisation, .go-to-artist, .go-to-fan {
 	background: -webkit-linear-gradient(top, #67ae55, #578843);
 	background-color: #69a74e;
 	-webkit-box-shadow: inset 0 1px 1px #a4e388;
@@ -18,6 +18,10 @@
 	text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 	width: 10%;
 	display: inline-block;
+}
+.go-to-artist, .go-to-fan {
+	width: 190px;
+	margin-right: 20px;
 }
 
 .submit-text {
