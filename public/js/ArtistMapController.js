@@ -1,4 +1,4 @@
-function ArtistMapController($scope) {
+function ArtistMapController($scope, mapService, $http) {
 
     //TODO centrer sur les coordonnées de l'utilisateur
     var cityOfUser = {
@@ -6,7 +6,6 @@ function ArtistMapController($scope) {
     };
 
     var searchRadius = 5;
-
 
     $scope.displayedArtists = [];
 
@@ -18,39 +17,19 @@ function ArtistMapController($scope) {
         markers: [],
         zoom: 9 // the zoom level
     });
-    var geocoder = new google.maps.Geocoder();
+
     var searchForLocation = function () {
-        geocoder.geocode({ 'address': $scope.localisation}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var centerLocation = results[0].geometry.location;
 
-                var longitude = centerLocation.lng();
-                var latitude = centerLocation.lat();
-                $scope.center = {
-                    lat: latitude,
-                    lng: longitude
-                };
+        mapService.geocode($scope.localisation, function (centerLocation) {
+            var longitude = centerLocation.lng();
+            var latitude = centerLocation.lat();
+            $scope.center = {
+                lat: latitude,
+                lng: longitude
+            };
 
-                //TODO Lancer une recherche autour de long lat et afficher les artistes
-
-                var artists = [
-                    {
-                        name: 'Defecation of Vomit',
-                        position: {
-                            lat: 48.87, // initial map center latitude
-                            lng: 2.34// initial map center longitude
-                        }
-                    },
-                    {
-                        name: 'Cattle decapitation',
-                        position: {
-                            lat: 48.88, // initial map center latitude
-                            lng: 2.34 // initial map center longitude
-                        }
-                    }
-                ];
-
-                $scope.markers = [];
+            $scope.markers = [];
+            $http.get('/artists-map/' + latitude + '/' + longitude + '/' + searchRadius).success(function (artists) {
                 _.forEach(artists, function (artist) {
                     $scope.markers.push({
                         latitude: parseFloat(artist.position.lat),
@@ -58,13 +37,12 @@ function ArtistMapController($scope) {
                         label: artist.name
                     });
                 });
+            });
 
-                $scope.zoom = 12;
-                $scope.$apply();
-            } else {
-                console.log("Geocode was not successful for the following reason: " + status);
-            }
+            $scope.zoom = 12;
+            $scope.$apply();
         });
+
     };
     $scope.$watch('localisation', _.debounce(searchForLocation, 1000));
 
