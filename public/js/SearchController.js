@@ -5,12 +5,10 @@ function SearchController($scope, searchService, $http) {
 
     $scope.addArtist = function (artistToAdd) {
         $scope.selectedArtists = searchService.addArtist(artistToAdd);
-        $http.post("http://xpua.cloudfoundry.com/users/1/artists/" + artistToAdd.id);
     };
 
     $scope.removeArtist = function (artistToRemove) {
         $scope.selectedArtists = searchService.removeArtist(artistToRemove);
-        $http.delete("/users/1/artists/" + artistToRemove.id);
     };
 
     $scope.searchResults = [];

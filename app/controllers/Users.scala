@@ -17,6 +17,10 @@ trait Users extends Controller {
   def removeArtist(idUser:String,idArtist:String) = AuthenticatedAction { request =>
     NoContent
   }
+
+  def addArtist(idUser:String,idArtist:String) = AuthenticatedAction { request =>
+    Ok
+  }
 }
 
 object Users extends Users

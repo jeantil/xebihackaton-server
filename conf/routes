@@ -14,9 +14,9 @@ GET     /auth/callback              controllers.Auth.callback
 
 POST   /users/:id                   controllers.Users.update(id:String)
 
-# POST     /users/:id/artists           controllers.User.
-# GET     /users/:id/artists           controllers.User.
-# PUT     /users/:id/artists           controllers.User.
+POST     /users/:idUser/artists/:idArtist           controllers.Users.addArtist(idUser:String,idArtist:String)
+# GET     /users/:id/artists           controllers.Users.
+# PUT     /users/:id/artists           controllers.Users.
 DELETE     /users/:idUser/artists/:idArtist           controllers.Users.removeArtist(idUser:String,idArtist:String)
 # GET    /search
 GET /artists-map/:lat/:long/:radius controllers.Artists.listmap(lat:Long, long:Long, radius:Long)
