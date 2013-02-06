@@ -13,6 +13,10 @@ angular.module('yawil', ['google-maps'])
                 templateUrl:'templates/artist-map.html',
                 controller:ArtistMapController
             })
+            .when('/map/user', {
+                templateUrl:'templates/user-map.html',
+                controller:UserMapController
+            })
             .otherwise({redirectTo:'/registration'});
     }]);
 
