@@ -1,4 +1,4 @@
-angular.module('yawil').factory('mapService', function ($http) {
+angular.module('yawil').factory('mapService', function () {
     var service = function () {
         var geocoder = new google.maps.Geocoder();
 
