@@ -29,6 +29,7 @@ var NavBarController = function ($scope, searchService, $http, $rootScope, $loca
 
     $scope.addArtist = function (artistToAdd) {
         $scope.selectedArtists = searchService.addArtist(artistToAdd);
+        $scope.searchTerm = '';
     };
 
     $scope.removeArtist = function (artistToRemove) {
@@ -38,17 +39,10 @@ var NavBarController = function ($scope, searchService, $http, $rootScope, $loca
     $scope.searchResults = [];
     var searchForTerm = function () {
         if ($scope.searchTerm) {
-            //TODO Faire un appel coté serveur
-            $scope.searchResults = [
-                {
-                    id: 3,
-                    name: "Bob Marley",
-                    position: {
-                        lat: 36,
-                        lng: 10
-                    }
-                }
-            ];
+
+            $http.get('/artists?q=' + $scope.searchTerm).success(function (artists) {
+                $scope.searchResults = artists
+            });
 
         } else {
             $scope.searchResults = [];
