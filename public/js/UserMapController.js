@@ -1,4 +1,5 @@
 function UserMapController($scope) {
+
     angular.extend($scope, {
         center: {
             lat: 48.85, // initial map center latitude

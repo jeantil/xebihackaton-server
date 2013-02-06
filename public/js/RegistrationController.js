@@ -1,4 +1,17 @@
 function RegistrationController($scope, mapService, $location) {
+    $scope.localisation = '';
+    $scope.hasLocation = false;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            mapService.reverseGeocode(position.coords.latitude, position.coords.longitude, function (address) {
+                $scope.localisation = address[2].long_name+','+address[4].long_name;
+                $scope.hasLocation = true;
+                $scope.$apply();
+            });
+
+        });
+    }
+
 
     angular.extend($scope, {
         center: {
@@ -9,9 +22,7 @@ function RegistrationController($scope, mapService, $location) {
         zoom: 9 // the zoom level
     });
 
-    $scope.localisation = '';
     var geocoder = new google.maps.Geocoder();
-    $scope.hasLocation = false;
     var searchForLocation = function () {
         mapService.geocode($scope.localisation, function (centerLocation) {
             var longitude = centerLocation.lng();

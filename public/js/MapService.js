@@ -12,6 +12,20 @@ angular.module('yawil').factory('mapService', function () {
                 }
             });
         };
+
+        this.reverseGeocode = function (lat, lng, callback) {
+            geocoder.geocode({'latLng': new google.maps.LatLng(lat, lng)}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        console.log(results[1]);
+                        callback(results[1].address_components);
+                    }
+                } else {
+                    console.log("Geocode was not successful for the following reason: " + status);
+                }
+            });
+
+        }
     };
     return new service();
 });
