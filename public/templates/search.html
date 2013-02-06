@@ -4,6 +4,10 @@
 
 </form>
 
-<div class="search-result">
-    <div ng-repeat="artist in searchResults">{{artist.name}}</div>
+<div class="search-results">
+    <div class="search-result" ng-repeat="artist in searchResults" ng-click="addArtist(artist)">{{artist.name}}</div>
+</div>
+
+<div class="selected-artists">
+    <div ng-repeat="artist in selectedArtists">{{artist.name}}</div>
 </div>

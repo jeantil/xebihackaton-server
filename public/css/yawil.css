@@ -6,3 +6,24 @@
 #gmap img {
     max-width: none;
 }
+
+
+.search-results {
+    border: solid black 1px;
+    float: left;
+    width: 45%;
+    min-height: 100px;
+
+}
+
+.search-result {
+    cursor: pointer;
+    height: 30px;
+}
+
+.selected-artists {
+    border: solid black 1px;
+    float: left;
+    width: 45%;
+    min-height: 100px;
+}
