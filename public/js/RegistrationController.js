@@ -1,4 +1,4 @@
-function RegistrationController($scope, $location) {
+function RegistrationController($scope, mapService, $location) {
 
     angular.extend($scope, {
         center: {
@@ -13,32 +13,26 @@ function RegistrationController($scope, $location) {
     var geocoder = new google.maps.Geocoder();
     $scope.hasLocation = false;
     var searchForLocation = function () {
-        geocoder.geocode({ 'address': $scope.localisation}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var centerLocation = results[0].geometry.location;
+        mapService.geocode($scope.localisation, function (centerLocation) {
+            var longitude = centerLocation.lng();
+            var latitude = centerLocation.lat();
+            $scope.center = {
+                lat: latitude,
+                lng: longitude
+            };
 
-                var longitude = centerLocation.lng();
-                var latitude = centerLocation.lat();
-                $scope.center = {
-                    lat: latitude,
-                    lng: longitude
-                };
+            $scope.markers = [
+                {
+                    latitude: parseFloat(latitude),
+                    longitude: parseFloat(longitude)
+                }
+            ];
 
-                $scope.markers = [
-                    {
-                        latitude: parseFloat(latitude),
-                        longitude: parseFloat(longitude)
-                    }
-                ];
-
-                $scope.zoom = 12;
-                $scope.hasLocation = true;
-                $scope.$apply();
-            } else {
-                console.log("Geocode was not successful for the following reason: " + status);
-                $scope.hasLocation = false;
-            }
+            $scope.zoom = 12;
+            $scope.hasLocation = true;
+            $scope.$apply();
         });
+
     };
 
     $scope.$watch('localisation', _.debounce(searchForLocation, 1000));
