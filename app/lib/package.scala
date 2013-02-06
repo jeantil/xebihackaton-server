@@ -16,7 +16,10 @@ package object mvc {
       def parser = bodyParser
 
       def apply(f: Request[A]) = {
-        block(f)
+        authenticate(f).map(
+          login => block(f)
+        ) getOrElse
+          Redirect(GoogleOAuth2.signIn)
 
       }
     }
