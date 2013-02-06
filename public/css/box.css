@@ -1,0 +1,296 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	background-color: #441e09;
+	background-repeat:no-repeat;
+	background:url(../images/star.png) center 20px no-repeat, url(../images/stage_bg.png);
+}
+
+#coords{
+	position: relative;
+	width:80%;
+	margin: 0px auto;
+	height: 30px;
+	border: solid black 1px;
+	background-color:#CCC;
+}
+
+section#stage{
+	-webkit-perspective: 700px;
+	-moz-perspective: 700px;
+	-ms-perspective: 700px;
+	-o-perspective: 700px;
+	perspective: 700px;
+	-webkit-perspective-origin: 50% 50%;
+	-moz-perspective-origin: 50% 50%;
+	-o-perspective-origin: 50% 50%;
+	-ms-perspective-origin: 50% 50%;
+	perspective-origin: 50% 50%;
+	display: block;
+	position: relative;
+	left: 50%;
+	width: 300px;
+	height: 300px;
+	margin: 20px 0px 0px -150px;
+	-webkit-box-reflect:below -120px
+    -webkit-gradient(linear, left top, left bottom, from(transparent),
+    color-stop(0.5, transparent), to(#ffffff));
+}
+
+article#box{
+	-webkit-transform: rotate3d(1,0,0,-40deg);
+	-moz-transform: rotate3d(1,0,0,-40deg);
+	-ms-transform: rotate3d(1,0,0,-40deg);
+	-o-transform:  rotate3d(1,0,0,-40deg);
+	transform:  rotate3d(1,0,0,-40deg);
+	cursor: move;
+	position: relative;
+	margin-top: -55px;
+	margin-left: -55px;
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	width: 110px;
+	height: 110px;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+#box section{
+	margin-top: -55px;
+	margin-left: -55px;
+	position: absolute;
+	display: block;
+	overflow: hidden;
+	top: 50%; 
+	left: 50%;
+	-webkit-transform-style: flat;
+	-moz-transform-style: flat;
+	-o-transform-style: flat;
+	transform-style: flat;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+#front {
+	position:relative;
+}
+
+#hair{
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+#front,
+#back{
+	width: 110px;
+	height: 110px;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+	-moz-transform: translate3d(0px, 0px, 0px);
+	-o-transform: translate3d(0px, 0px, 0px);
+	transform: translate3d(0px, 0px, 0px);
+	background-color: transparent;
+	
+}
+
+#top{
+	text-indent: -999px;
+	overflow: hidden;
+	width: 110px;
+	height: 0px;
+	background-image:none;
+	background-color: #00537e;
+	-webkit-transform: rotateX(90deg) translate3d(0px, 0px, 37px);
+	-moz-transform: rotateX(90deg) translate3d(0px, 0px, 37px);
+	-o-transform: rotateX(90deg) translate3d(0px, 0px, 37px);
+	-transform: rotateX(90deg) translate3d(0px, 0px, 37px);
+}
+
+#bottom{
+	text-indent: -999px;
+	overflow: hidden;
+	width: 110px;
+	height: 0px;
+	-webkit-transform: rotateX(-90deg) translate3d(0px, 0px, 74px);
+	-moz-transform:    rotateX(-90deg) translate3d(0px, 0px, 74px);
+	-o-transform:      rotateX(-90deg) translate3d(0px, 0px, 74px);
+	-transform:        rotateX(-90deg) translate3d(0px, 0px, 74px);
+	background-image:none;
+	background-color: #00537e;
+}
+
+#back{
+	background-image:none;
+	-webkit-transform: rotateY(180deg) translate3d(0px, 0px, 37px);
+	-moz-transform: rotateY(180deg) translate3d(0px, 0px, 37px);
+	-o-transform: rotateY(180deg) translate3d(0px, 0px, 37px);
+	-transform: rotateY(180deg) translate3d(0px, 0px, 37px);
+	
+}
+#left{
+	width: 74px;
+	height: 0px;
+	-webkit-transform: rotateY(-90deg) translate3d(0px, 0px, 37px);
+	-moz-transform: rotateY(-90deg) translate3d(0px, 0px, 37px);
+	-o-transform: rotateY(-90deg) translate3d(0px, 0px, 37px);
+	-transform: rotateY(-90deg) translate3d(0px, 0px, 37px);
+	background-color: #00537e;
+}
+
+#right{
+	width: 74px;
+	height: 0px;
+	-webkit-transform: rotateY(90deg) translate3d(0px, 0px, 74px);
+	-moz-transform:    rotateY(90deg) translate3d(0px, 0px, 74px);
+	-o-transform:      rotateY(90deg) translate3d(0px, 0px, 74px);
+	-transform:        rotateY(90deg) translate3d(0px, 0px, 74px);
+	background-color: #00537e;
+	background-image:none;
+}
+
+#box section *{
+	position: absolute;
+	overflow: hidden;
+	text-indent: -999px;
+}
+
+#front h1,
+#back h1{
+	top: 27px;
+	left: 22px;
+	width: 209px;
+	height: 101px;
+	background-position: -317px -27px;
+}
+#front h2,
+#back h2{
+	top: 145px;
+	left: 21px;
+	width: 209px;
+	height: 101px;
+	background-position: -317px -145px;
+	
+}
+#front h3,
+#back h3{
+	top: 256px;
+	left:26px;
+	width: 202px;
+	height: 47px;
+	background-position: -319px -256px;
+	
+}
+
+
+#front h4,
+#back h4{
+	top: 0px;
+	left: 0px;
+	width: 133px;
+	height: 105px;
+	background-position: -572px 2px;
+}
+
+#front p,
+#back p{
+	top: 110px;
+	left:58px;
+	display: block;
+	width: 133px;
+	height: 20px;
+	background-position: -352px -110px;
+}
+
+#front img,
+#back img{
+	width: 110px;
+	height:110px;
+	z-index: 10;
+	top: 0px;
+	left: 0px;
+	background-image:none;
+}
+
+#left h2{
+	width: 56px;
+	height: 110px;
+	text-indent: -999px;
+	overflow: hidden;
+	position: absolute;
+	left: 7px;
+	top: 0px;
+}
+
+#right h1{
+	width: 56px;
+	height: 110px;
+	text-indent: -999px;
+	overflow: hidden;
+	position: absolute;
+	left: 20px;
+	top: 0px;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+	clear: both;
+	visibility: hidden;
+	overflow:hidden;
+	font-size: 0px;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+/*Replacement HTML*/
+
+#stage h1{
+	color: white;
+	text-align:center;
+	font-size: 18px;
+	font-family:Georgia, serif;
+	font-style:italic;
+	margin: 0px 0px 24px;
+	padding: 0px;
+	display: block;
+	padding-top: 12px;
+}
+
+#stage>p{
+	width: 420px;
+	margin: 0px 88px 24px;
+	color: white;
+	font-size: 12px;
+	line-height: 17px;
+	font-family:Verdana, sans-serif;
+}
+
+#stage a{
+	color: white;
+	text-decoration: underline;
+}
+#stage a:hover{
+	color: black;
+	text-decoration: none;
+	background-color: white;
+}
+
+#stage iFrame{
+	margin: 0px 88px;
+	border: solid #896214 12px;
+}
