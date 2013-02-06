@@ -13,6 +13,10 @@ trait Users extends Controller {
 
     Ok(toJson(user))
   }
+
+  def removeArtist(idUser:String,idArtist:String) = AuthenticatedAction { request =>
+    NoContent
+  }
 }
 
 object Users extends Users

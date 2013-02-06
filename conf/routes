@@ -17,7 +17,7 @@ POST   /users/:id                   controllers.Users.update(id:String)
 # POST     /users/:id/artists           controllers.User.
 # GET     /users/:id/artists           controllers.User.
 # PUT     /users/:id/artists           controllers.User.
-# DELETE     /users/:id/artists           controllers.User.
+DELETE     /users/:idUser/artists/:idArtist           controllers.Users.removeArtist(idUser:String,idArtist:String)
 # GET    /search
 GET /artists-map/:lat/:long/:radius controllers.Artists.listmap(lat:Long, long:Long, radius:Long)
 # /users-map/:lat:long
