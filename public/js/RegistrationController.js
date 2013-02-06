@@ -1,15 +1,12 @@
 function RegistrationController($scope, mapService, $location) {
     $scope.localisation = '';
     $scope.hasLocation = false;
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            mapService.reverseGeocode(position.coords.latitude, position.coords.longitude, function (address) {
-                $scope.localisation = address[2].long_name + ',' + address[4].long_name;
-                $scope.hasLocation = true;
-                $scope.$apply();
-            });
-        });
-    }
+
+    mapService.geolocalize(function (address) {
+        $scope.localisation = address;
+        $scope.hasLocation = true;
+        $scope.$apply();
+    });
 
     angular.extend($scope, {
         center: {
