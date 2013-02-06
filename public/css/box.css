@@ -291,6 +291,7 @@ article#box{
 }
 
 #stage iFrame{
+	display: none;
 	margin: 0px 88px;
 	border: solid #896214 12px;
 }
