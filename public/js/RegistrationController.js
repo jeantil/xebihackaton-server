@@ -1,4 +1,4 @@
-function RegistrationController($scope, mapService, $location) {
+function RegistrationController($scope, mapService, userService, $location, $http) {
     $scope.localisation = '';
     $scope.hasLocation = false;
 
@@ -44,6 +44,10 @@ function RegistrationController($scope, mapService, $location) {
     $scope.$watch('localisation', _.debounce(searchForLocation, 1000));
     $scope.register = function (isValid) {
         if (isValid && $scope.hasLocation) {
+            userService.currentUser().then(function(user) {
+                user.city = {lat:1.1, lng:2.2};
+                $http.post("/users/" + user.id, user);
+            })
             $location.path('/home');
         }
     }
