@@ -5,7 +5,7 @@ import lib.mvc.AuthenticatedAction
 
 trait Application extends Controller {
   def index = AuthenticatedAction { request =>
-    Ok("index")
+    Redirect(routes.Assets.at("index.html"))
   }
 }
 object Application extends Application
