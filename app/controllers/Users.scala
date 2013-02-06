@@ -6,15 +6,19 @@ import play.api.libs.json.Json._
 
 import model._
 import model.Formats._
-
-import model.{Position, User}
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 
 trait Users extends Controller {
-  def update(id:String)= AuthenticatedAction { request =>
-    val user=User(None,id, "John Doe", Some(Position(48.8753,2.3112)), "jdoe@xebia.fr")
-    Ok(toJson(user))
+  def update(id:String)= AuthenticatedAction(parse.json) { request =>
+    val user:User = request.body.as[User]
+    Async{
+      val map = User.save(user).map {
+        u => Ok(toJson(u))
+      }
+      map.onFailure({ case t=> Unauthorized})
+      map
+    }
   }
 
   def removeArtist(idUser: String, idArtist: String) = AuthenticatedAction {
