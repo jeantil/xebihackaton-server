@@ -5,8 +5,8 @@ import play.api.libs.json._
 
 object Auth extends Controller {
 
-  import model.model.User
-  import model.model.Formats.userReads
+  import model.User
+  import model.Formats.userReads
 
   import play.module.oauth2.GoogleOAuth2
   import scala.concurrent.Future
@@ -27,6 +27,7 @@ object Auth extends Controller {
           code =>
             for {
               user <- GoogleOAuth2.authenticate[User](code)
+              savedUser <- User.orCreate(user)
             } yield Redirect(routes.Application.index()).withSession("login" -> user.id)
         } getOrElse Future.successful(Unauthorized)
       }
