@@ -26,7 +26,16 @@ trait Artists extends Controller {
     ,Artist(None,"6", "Psy" ,Position(48.866,2.3111))
     ,Artist(None,"7", "Amadeus Mozart" ,Position(49.8760,2.3224))
     ).filter { artist =>  ref.distance(artist.position) <= rad }
-    Ok(toJson(artists))
+
+    val map = Artist.list().map(l => l.filter {
+      artist => ref.distance(artist.position) <= rad
+    }).map({
+      artists => Ok(toJson(artists))
+    })
+    map.onFailure({case _ => Unauthorized})
+    Async {
+      map
+    }
   }
 
   def startingWith(query:String) = AuthenticatedAction{ request =>
